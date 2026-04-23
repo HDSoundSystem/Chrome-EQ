@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Audio Visualizer & EQ",
+  "version": "1.0",
+  "permissions": ["tabCapture", "tabs", "offscreen"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

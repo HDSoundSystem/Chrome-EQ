@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; width: 250px; padding: 15px; background-color: #f4f4f4; }
+    .eq-container { display: flex; justify-content: space-around; height: 160px; margin: 15px 0; }
+    .column { display: flex; flex-direction: column; align-items: center; }
+    
+    input[type=range][orient=vertical] {
+      appearance: slider-vertical;
+      width: 20px;
+      height: 100px;
+      cursor: pointer;
+    }
+    
+    .label { font-size: 11px; font-weight: bold; margin-top: 8px; color: #333; }
+    
+    .rst-btn { 
+      margin-top: 5px; 
+      padding: 2px 5px; 
+      font-size: 9px; 
+      cursor: pointer; 
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 3px;
+    }
+    .rst-btn:hover { background: #eee; }
+
+    .bypass-btn { padding: 10px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; border-radius: 5px; border: 1px solid #444; }
+    .active { background-color: #e74c3c; color: white; border: none; }
+    #start-btn { width: 100%; padding: 10px; margin-bottom: 10px; background-color: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+    #start-btn:disabled { background-color: #bdc3c7; cursor: default; }
+  </style>
+</head>
+<body>
+  <button id="start-btn">Enable Equalizer</button>
+  
+  <div class="eq-container">
+    <div class="column">
+      <input type="range" id="bass" min="-20" max="20" value="0" orient="vertical">
+      <div class="label">BASS</div>
+      <button class="rst-btn" data-target="bass">RST</button>
+    </div>
+    <div class="column">
+      <input type="range" id="mid" min="-20" max="20" value="0" orient="vertical">
+      <div class="label">MID</div>
+      <button class="rst-btn" data-target="mid">RST</button>
+    </div>
+    <div class="column">
+      <input type="range" id="treble" min="-20" max="20" value="0" orient="vertical">
+      <div class="label">TREBLE</div>
+      <button class="rst-btn" data-target="treble">RST</button>
+    </div>
+  </div>
+
+  <button id="bypass" class="bypass-btn">Bypass: OFF</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
