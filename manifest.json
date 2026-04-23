@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Audio Visualizer & EQ",
-  "version": "1.0",
-  "permissions": ["tabCapture", "tabs", "offscreen"],
+  "name": "Audio EQ & Visualizer",
+  "version": "1.3",
+  "permissions": ["tabCapture", "offscreen", "tabs"],
   "action": {
     "default_popup": "popup.html"
   },
