@@ -3,46 +3,51 @@ const midSlider = document.getElementById('mid');
 const trebleSlider = document.getElementById('treble');
 const bypassBtn = document.getElementById('bypass');
 const startBtn = document.getElementById('start-btn');
+const stopBtn = document.getElementById('stop-btn');
 
 let isBypass = false;
 
-function updateFilters() {
-  const settings = {
-    bass: bassSlider.value,
-    mid: midSlider.value,
-    treble: trebleSlider.value,
-    bypass: isBypass
-  };
-  chrome.runtime.sendMessage({ type: "UPDATE_EQ", data: settings });
+function sendUpdate() {
+  chrome.runtime.sendMessage({
+    type: "UPDATE_EQ",
+    data: {
+      bass: bassSlider.value,
+      mid: midSlider.value,
+      treble: trebleSlider.value,
+      bypass: isBypass
+    }
+  });
 }
 
-// Bouton de démarrage
 startBtn.onclick = () => {
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     chrome.tabCapture.getMediaStreamId({targetTabId: tabs[0].id}, (streamId) => {
       chrome.runtime.sendMessage({ type: "START_AUDIO", streamId: streamId });
-      startBtn.innerText = "Audio Captured ✓";
-      startBtn.disabled = true;
+      startBtn.style.display = "none";
+      stopBtn.style.display = "block";
     });
   });
 };
 
-// Gestion des boutons RST
+stopBtn.onclick = () => {
+  chrome.runtime.sendMessage({ type: "STOP_AUDIO" });
+  stopBtn.style.display = "none";
+  startBtn.style.display = "block";
+};
+
 document.querySelectorAll('.rst-btn').forEach(btn => {
   btn.onclick = () => {
     const target = document.getElementById(btn.getAttribute('data-target'));
     target.value = 0;
-    updateFilters();
+    sendUpdate();
   };
 });
 
-// Événements sliders
-[bassSlider, midSlider, trebleSlider].forEach(s => s.oninput = updateFilters);
+[bassSlider, midSlider, trebleSlider].forEach(s => s.oninput = sendUpdate);
 
-// Bouton Bypass
 bypassBtn.onclick = () => {
   isBypass = !isBypass;
-  bypassBtn.innerText = `Bypass: ${isBypass ? 'ON' : 'OFF'}`;
+  bypassBtn.innerText = `BYPASS: ${isBypass ? 'ON' : 'OFF'}`;
   bypassBtn.classList.toggle('active', isBypass);
-  updateFilters();
+  sendUpdate();
 };

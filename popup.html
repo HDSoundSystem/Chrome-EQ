@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; width: 250px; padding: 15px; background-color: #f4f4f4; }
-    .eq-container { display: flex; justify-content: space-around; height: 160px; margin: 15px 0; }
-    .column { display: flex; flex-direction: column; align-items: center; }
+    body { font-family: 'Segoe UI', sans-serif; text-align: center; width: 250px; padding: 15px; background-color: #f8f9fa; color: #333; }
+    
+    .header-controls { display: flex; gap: 10px; margin-bottom: 15px; }
+    
+    #start-btn, #stop-btn { flex: 2; padding: 10px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; font-size: 11px; }
+    #start-btn { background-color: #27ae60; color: white; }
+    #stop-btn { background-color: #e67e22; color: white; display: none; }
+    
+    .bypass-btn { flex: 1.2; padding: 10px; cursor: pointer; font-weight: bold; border-radius: 5px; border: 1px solid #ccc; background: #fff; font-size: 11px; }
+    .active { background-color: #e74c3c !important; color: white !important; border: none; }
+
+    .eq-container { display: flex; justify-content: space-around; height: 180px; margin: 20px 0; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #ddd; }
+    .column { display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
     
     input[type=range][orient=vertical] {
       appearance: slider-vertical;
@@ -14,27 +24,18 @@
       cursor: pointer;
     }
     
-    .label { font-size: 11px; font-weight: bold; margin-top: 8px; color: #333; }
+    .label { font-size: 10px; font-weight: bold; margin: 5px 0; color: #555; }
     
-    .rst-btn { 
-      margin-top: 5px; 
-      padding: 2px 5px; 
-      font-size: 9px; 
-      cursor: pointer; 
-      border: 1px solid #ccc;
-      background: #fff;
-      border-radius: 3px;
-    }
+    .rst-btn { padding: 2px 8px; font-size: 10px; cursor: pointer; border: 1px solid #ccc; background: #fdfdfd; border-radius: 3px; }
     .rst-btn:hover { background: #eee; }
-
-    .bypass-btn { padding: 10px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; border-radius: 5px; border: 1px solid #444; }
-    .active { background-color: #e74c3c; color: white; border: none; }
-    #start-btn { width: 100%; padding: 10px; margin-bottom: 10px; background-color: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-    #start-btn:disabled { background-color: #bdc3c7; cursor: default; }
   </style>
 </head>
 <body>
-  <button id="start-btn">Enable Equalizer</button>
+  <div class="header-controls">
+    <button id="start-btn">START EQ</button>
+    <button id="stop-btn">STOP EQ</button>
+    <button id="bypass" class="bypass-btn">BYPASS: OFF</button>
+  </div>
   
   <div class="eq-container">
     <div class="column">
@@ -53,8 +54,6 @@
       <button class="rst-btn" data-target="treble">RST</button>
     </div>
   </div>
-
-  <button id="bypass" class="bypass-btn">Bypass: OFF</button>
 
   <script src="popup.js"></script>
 </body>
