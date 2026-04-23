@@ -32,11 +32,14 @@
 </head>
 <body>
   <div class="header-controls">
-    <button id="start-btn">START EQ</button>
-    <button id="stop-btn">STOP EQ</button>
-    <button id="bypass" class="bypass-btn">BYPASS: OFF</button>
-  </div>
-  
+  <button id="start-btn">START EQ</button>
+  <button id="stop-btn">STOP EQ</button>
+  <button id="bypass" class="bypass-btn">BYPASS: OFF</button>
+  <button id="popout-btn" class="rst-btn" title="Open in window" style="flex: 0.4; font-size: 14px;">⇱</button>
+</div>
+
+<canvas id="eq-curve" width="220" height="60" style="background: #222; border-radius: 5px; margin-bottom: 10px; border: 1px solid #444;"></canvas>  
+
   <div class="eq-container">
     <div class="column">
       <input type="range" id="bass" min="-20" max="20" value="0" orient="vertical">
@@ -54,6 +57,8 @@
       <button class="rst-btn" data-target="treble">RST</button>
     </div>
   </div>
+
+<button id="loudness-btn" class="bypass-btn" style="margin-top: 10px; margin-bottom: 10px;">LOUDNESS: OFF</button>
 
   <script src="popup.js"></script>
 </body>
