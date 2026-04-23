@@ -6,13 +6,12 @@
     body { 
       font-family: 'Segoe UI', sans-serif; 
       text-align: center; 
-      width: 280px; 
+      width: 260px; 
       padding: 15px; 
       background-color: #f8f9fa; 
       color: #333; 
     }
     
-    /* En-tête : START, STOP, BYPASS et Pop-out */
     .header-controls { 
       display: flex; 
       gap: 8px; 
@@ -45,7 +44,6 @@
     
     .active { background-color: #e74c3c !important; color: white !important; border: none; }
 
-    /* Visualisation de la courbe */
     #eq-curve { 
       background: #222; 
       border-radius: 8px; 
@@ -56,7 +54,6 @@
       height: 70px;
     }
 
-    /* Container des 3 sliders verticaux (BASS, MID, TREBLE) */
     .eq-container { 
       display: flex; 
       justify-content: space-around; 
@@ -81,12 +78,7 @@
       cursor: pointer;
     }
     
-    .label { 
-      font-size: 10px; 
-      font-weight: bold; 
-      margin: 5px 0; 
-      color: #555; 
-    }
+    .label { font-size: 10px; font-weight: bold; margin: 5px 0; color: #555; }
     
     .rst-btn { 
       padding: 2px 6px; 
@@ -96,10 +88,7 @@
       background: #fdfdfd; 
       border-radius: 3px; 
     }
-    
-    .rst-btn:hover { background: #eee; }
 
-    /* Zone Volume Horizontal */
     .volume-horizontal-container {
       background: #fff;
       margin-top: 12px;
@@ -111,23 +100,9 @@
       gap: 10px;
     }
 
-    input[id="volume"] {
-      flex: 1;
-      cursor: pointer;
-      height: 5px;
-    }
-
-    .vol-label {
-      font-size: 10px;
-      font-weight: bold;
-      color: #555;
-      min-width: 25px;
-    }
-
-    /* Pied de page : LOUDNESS */
-    .footer-controls {
-      margin-top: 12px;
-    }
+    input[id="volume"] { flex: 1; cursor: pointer; height: 5px; }
+    .vol-label { font-size: 10px; font-weight: bold; color: #555; min-width: 25px; }
+    .footer-controls { margin-top: 12px; }
   </style>
 </head>
 <body>
@@ -136,7 +111,6 @@
     <button id="start-btn">START EQ</button>
     <button id="stop-btn">STOP EQ</button>
     <button id="bypass" class="bypass-btn">BYPASS: OFF</button>
-    <button id="popout-btn" class="rst-btn" title="Pop-out" style="padding: 0 10px; font-size: 14px;">⇱</button>
   </div>
 
   <canvas id="eq-curve"></canvas>
@@ -147,13 +121,11 @@
       <div class="label">BASS</div>
       <button class="rst-btn" data-target="bass">RST</button>
     </div>
-
     <div class="column">
       <input type="range" id="mid" min="-20" max="20" value="0" orient="vertical">
       <div class="label">MID</div>
       <button class="rst-btn" data-target="mid">RST</button>
     </div>
-
     <div class="column">
       <input type="range" id="treble" min="-20" max="20" value="0" orient="vertical">
       <div class="label">TREBLE</div>
