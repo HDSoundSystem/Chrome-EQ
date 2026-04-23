@@ -3,54 +3,157 @@
 <head>
   <meta charset="UTF-8">
   <style>
-    body { font-family: 'Segoe UI', sans-serif; text-align: center; width: 250px; padding: 15px; background-color: #f8f9fa; color: #333; }
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      text-align: center; 
+      width: 280px; 
+      padding: 15px; 
+      background-color: #f8f9fa; 
+      color: #333; 
+    }
     
-    .header-controls { display: flex; gap: 10px; margin-bottom: 15px; }
+    /* En-tête : START, STOP, BYPASS et Pop-out */
+    .header-controls { 
+      display: flex; 
+      gap: 8px; 
+      margin-bottom: 15px; 
+    }
     
-    #start-btn, #stop-btn { flex: 2; padding: 10px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; font-size: 11px; }
+    #start-btn, #stop-btn { 
+      flex: 2; 
+      padding: 10px; 
+      font-weight: bold; 
+      border: none; 
+      border-radius: 5px; 
+      cursor: pointer; 
+      font-size: 11px; 
+    }
+    
     #start-btn { background-color: #27ae60; color: white; }
     #stop-btn { background-color: #e67e22; color: white; display: none; }
     
-    .bypass-btn { flex: 1.2; padding: 10px; cursor: pointer; font-weight: bold; border-radius: 5px; border: 1px solid #ccc; background: #fff; font-size: 11px; }
+    .bypass-btn { 
+      flex: 1.2; 
+      padding: 10px; 
+      cursor: pointer; 
+      font-weight: bold; 
+      border-radius: 5px; 
+      border: 1px solid #ccc; 
+      background: #fff; 
+      font-size: 10px; 
+    }
+    
     .active { background-color: #e74c3c !important; color: white !important; border: none; }
 
-    .eq-container { display: flex; justify-content: space-around; height: 180px; margin: 20px 0; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #ddd; }
-    .column { display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+    /* Visualisation de la courbe */
+    #eq-curve { 
+      background: #222; 
+      border-radius: 8px; 
+      margin-bottom: 12px; 
+      border: 1px solid #444; 
+      display: block;
+      width: 100%;
+      height: 70px;
+    }
+
+    /* Container des 3 sliders verticaux (BASS, MID, TREBLE) */
+    .eq-container { 
+      display: flex; 
+      justify-content: space-around; 
+      height: 160px; 
+      background: #fff; 
+      padding: 12px; 
+      border-radius: 8px; 
+      border: 1px solid #ddd; 
+    }
+    
+    .column { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: space-between; 
+    }
     
     input[type=range][orient=vertical] {
       appearance: slider-vertical;
-      width: 20px;
-      height: 100px;
+      width: 16px;
+      height: 80px;
       cursor: pointer;
     }
     
-    .label { font-size: 10px; font-weight: bold; margin: 5px 0; color: #555; }
+    .label { 
+      font-size: 10px; 
+      font-weight: bold; 
+      margin: 5px 0; 
+      color: #555; 
+    }
     
-    .rst-btn { padding: 2px 8px; font-size: 10px; cursor: pointer; border: 1px solid #ccc; background: #fdfdfd; border-radius: 3px; }
+    .rst-btn { 
+      padding: 2px 6px; 
+      font-size: 9px; 
+      cursor: pointer; 
+      border: 1px solid #ccc; 
+      background: #fdfdfd; 
+      border-radius: 3px; 
+    }
+    
     .rst-btn:hover { background: #eee; }
+
+    /* Zone Volume Horizontal */
+    .volume-horizontal-container {
+      background: #fff;
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input[id="volume"] {
+      flex: 1;
+      cursor: pointer;
+      height: 5px;
+    }
+
+    .vol-label {
+      font-size: 10px;
+      font-weight: bold;
+      color: #555;
+      min-width: 25px;
+    }
+
+    /* Pied de page : LOUDNESS */
+    .footer-controls {
+      margin-top: 12px;
+    }
   </style>
 </head>
 <body>
+
   <div class="header-controls">
-  <button id="start-btn">START EQ</button>
-  <button id="stop-btn">STOP EQ</button>
-  <button id="bypass" class="bypass-btn">BYPASS: OFF</button>
-  <button id="popout-btn" class="rst-btn" title="Open in window" style="flex: 0.4; font-size: 14px;">⇱</button>
-</div>
+    <button id="start-btn">START EQ</button>
+    <button id="stop-btn">STOP EQ</button>
+    <button id="bypass" class="bypass-btn">BYPASS: OFF</button>
+    <button id="popout-btn" class="rst-btn" title="Pop-out" style="padding: 0 10px; font-size: 14px;">⇱</button>
+  </div>
 
-<canvas id="eq-curve" width="220" height="60" style="background: #222; border-radius: 5px; margin-bottom: 10px; border: 1px solid #444;"></canvas>  
-
+  <canvas id="eq-curve"></canvas>
+  
   <div class="eq-container">
     <div class="column">
       <input type="range" id="bass" min="-20" max="20" value="0" orient="vertical">
       <div class="label">BASS</div>
       <button class="rst-btn" data-target="bass">RST</button>
     </div>
+
     <div class="column">
       <input type="range" id="mid" min="-20" max="20" value="0" orient="vertical">
       <div class="label">MID</div>
       <button class="rst-btn" data-target="mid">RST</button>
     </div>
+
     <div class="column">
       <input type="range" id="treble" min="-20" max="20" value="0" orient="vertical">
       <div class="label">TREBLE</div>
@@ -58,7 +161,15 @@
     </div>
   </div>
 
-<button id="loudness-btn" class="bypass-btn" style="margin-top: 10px; margin-bottom: 10px;">LOUDNESS: OFF</button>
+  <div class="volume-horizontal-container">
+    <div class="vol-label">VOL</div>
+    <input type="range" id="volume" min="0" max="200" value="100">
+    <button class="rst-btn" data-target="volume">RST</button>
+  </div>
+
+  <div class="footer-controls">
+    <button id="loudness-btn" class="bypass-btn" style="width: 100%;">LOUDNESS: OFF</button>
+  </div>
 
   <script src="popup.js"></script>
 </body>
