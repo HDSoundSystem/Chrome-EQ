@@ -2,6 +2,8 @@
 
 A lightweight Chrome extension to sculpt your sound experience in real-time on any tab.
 
+<img width="297" height="447" alt="Capture d’écran 2026-04-23 184608" src="https://github.com/user-attachments/assets/006288c9-33e0-4b33-8f87-fe42b74a2fc3" />
+
 ## 🚀 Installation (Developer Mode)
 
 1. Download the extension files into a folder.
